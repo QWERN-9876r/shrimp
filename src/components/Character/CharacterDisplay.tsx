@@ -412,10 +412,6 @@ export const CharacterDisplay: React.FC = () => {
 	const { player } = useGameStore()
 	const { equipment } = player
 
-	const handleItemClick = (itemType: EquipmentType) => {
-		console.log(`Clicked on ${itemType}:`, equipment[itemType])
-	}
-
 	return (
 		<CharacterContainer>
 			{/* Уровень игрока */}
@@ -432,7 +428,6 @@ export const CharacterDisplay: React.FC = () => {
 			<HelmetSlot>
 				<EquipmentSlotComponent
 					item={equipment.helmet}
-					onClick={() => handleItemClick('helmet')}
 					dataAttribute="helmet" // Добавляем для эффектов
 				/>
 			</HelmetSlot>
@@ -440,7 +435,6 @@ export const CharacterDisplay: React.FC = () => {
 			<ArmorSlot>
 				<EquipmentSlotComponent
 					item={equipment.armor}
-					onClick={() => handleItemClick('armor')}
 					dataAttribute="armor"
 				/>
 			</ArmorSlot>
@@ -448,7 +442,6 @@ export const CharacterDisplay: React.FC = () => {
 			<LeftHandSlot>
 				<EquipmentSlotComponent
 					item={equipment.leftHand}
-					onClick={() => handleItemClick('leftHand')}
 					dataAttribute="leftHand"
 				/>
 			</LeftHandSlot>
@@ -460,7 +453,6 @@ export const CharacterDisplay: React.FC = () => {
 			<RightHandSlot>
 				<EquipmentSlotComponent
 					item={equipment.rightHand}
-					onClick={() => handleItemClick('rightHand')}
 					dataAttribute="rightHand"
 				/>
 			</RightHandSlot>
@@ -468,7 +460,6 @@ export const CharacterDisplay: React.FC = () => {
 			<BootsSlot>
 				<EquipmentSlotComponent
 					item={equipment.boots}
-					onClick={() => handleItemClick('boots')}
 					dataAttribute="boots"
 				/>
 			</BootsSlot>

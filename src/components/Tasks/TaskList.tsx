@@ -440,8 +440,6 @@ const TaskItemComponent: React.FC<TaskItemComponentProps> = ({
 	potions = potions.filter(Boolean)
 	const bestPotion = getBestPotion(potions)
 
-	console.log(colors.rarity[bestPotion!.rarity])
-
 	const handleComplete = async () => {
 		setIsCompleting(true)
 		setShowCompletionEffect(true)
