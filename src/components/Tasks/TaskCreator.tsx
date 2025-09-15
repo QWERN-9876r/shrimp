@@ -324,6 +324,20 @@ const TaskForm = styled(motion.div)`
 	border: 1px solid ${colors.ui.border};
 `
 
+const TIME_ON_MISSION_COMPLETE = [
+	'',
+	'5 минут',
+	'15 минут',
+	'30 минут',
+	'час',
+	'3 часа',
+	'6 часов',
+	'12 часов',
+	'3 дня',
+	'1 неделя',
+	'> недели',
+] as const
+
 export const TaskCreator = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [errors, setErrors] = useState<Record<string, string>>({})
@@ -428,6 +442,8 @@ export const TaskCreator = () => {
 			setErrors((prev) => ({ ...prev, [field]: '' }))
 		}
 	}
+
+	const timeOnMissionComplite = TIME_ON_MISSION_COMPLETE[formData.difficulty]
 
 	return (
 		<TaskCreatorContainer>
@@ -603,15 +619,7 @@ export const TaskCreator = () => {
 											color: colors.ui.textSecondary,
 										}}
 									>
-										{formData.difficulty <= 3 && '😊 Легко'}
-										{formData.difficulty > 3 &&
-											formData.difficulty <= 6 &&
-											'🤔 Средне'}
-										{formData.difficulty > 6 &&
-											formData.difficulty <= 8 &&
-											'😅 Сложно'}
-										{formData.difficulty > 8 &&
-											'🔥 Очень сложно'}
+										{timeOnMissionComplite}
 									</div>
 								</SliderContainer>
 
