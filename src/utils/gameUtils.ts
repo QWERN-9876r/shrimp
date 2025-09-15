@@ -309,7 +309,7 @@ export const generatePotionsByTask = (task: Task) => {
 		3,
 	)
 
-	if (rewardCount === 0) return [getRandomPotionByRarity('common')]
+	if (rewardCount === 0) return []
 
 	const getedPotions: Potion[] = new Array(rewardCount)
 
