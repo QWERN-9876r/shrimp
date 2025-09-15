@@ -117,7 +117,7 @@ function App() {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8 }}
 				>
-					<Title>⚔️ Life RPG ⚔️</Title>
+					<Title>⚔️ Shrimp ⚔️</Title>
 				</Header>
 
 				<MainContent>
