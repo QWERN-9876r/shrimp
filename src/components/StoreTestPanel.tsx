@@ -210,6 +210,7 @@ const StoreTestPanel = () => {
 			description: 'Создано через тестовую панель',
 			category: taskForm.category,
 			difficulty: taskForm.difficulty,
+			realDifficulty: taskForm.difficulty,
 			unwillingness: taskForm.unwillingness,
 			completed: false,
 		})

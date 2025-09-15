@@ -434,7 +434,10 @@ export const TaskCreator = () => {
 		setIsOpen(false)
 	}
 
-	const handleInputChange = (field: string, value: string) => {
+	const handleInputChange = (
+		field: string,
+		value: (typeof formData)[keyof typeof formData],
+	) => {
 		setFormData((prev) => ({ ...prev, [field]: value }))
 
 		// Очищаем ошибку при изменении поля
@@ -443,7 +446,7 @@ export const TaskCreator = () => {
 		}
 	}
 
-	const timeOnMissionComplite = TIME_ON_MISSION_COMPLETE[formData.difficulty]
+	const timeOnMissionComplete = TIME_ON_MISSION_COMPLETE[formData.difficulty]
 
 	return (
 		<TaskCreatorContainer>
@@ -619,7 +622,7 @@ export const TaskCreator = () => {
 											color: colors.ui.textSecondary,
 										}}
 									>
-										{timeOnMissionComplite}
+										{timeOnMissionComplete}
 									</div>
 								</SliderContainer>
 

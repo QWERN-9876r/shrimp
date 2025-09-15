@@ -600,7 +600,7 @@ const TaskItemComponent: React.FC<TaskItemComponentProps> = ({
 				{[
 					{
 						type: 'difficulty' as const,
-						value: task.difficulty / task.unwillingness,
+						value: task.difficulty,
 						label: 'Сложность',
 					},
 					{

@@ -122,6 +122,7 @@ export const createTestTask = (
 	category,
 	completed: false,
 	experience: calculateTaskExperience(difficulty, unwillingness),
+	realDifficulty: difficulty,
 	createdAt: new Date(),
 })
 
@@ -304,7 +305,7 @@ export const getBestPotion = (potions: Potion[]) => {
 
 export const generatePotionsByTask = (task: Task) => {
 	const rewardCount = Math.min(
-		Math.round((task.difficulty / 30) * (Math.random() / 2 + 0.5)),
+		Math.round((task.realDifficulty / 30) * (Math.random() / 2 + 0.5)),
 		3,
 	)
 
@@ -314,7 +315,7 @@ export const generatePotionsByTask = (task: Task) => {
 
 	let rarity: PotionRarity = 'common'
 
-	const roll = Math.random() * 2 * task.difficulty
+	const roll = Math.random() * 2 * task.realDifficulty
 	if (roll <= RARITY_PRICE.common) rarity = 'common'
 	else if (roll <= RARITY_PRICE.rare) rarity = 'rare'
 	else if (roll <= RARITY_PRICE.epic) rarity = 'epic'

@@ -63,7 +63,8 @@ export interface Task {
 	id: string
 	title: string
 	description?: string
-	difficulty: number // 1-100
+	difficulty: number // 1-10
+	realDifficulty: number
 	unwillingness: number // 1-10
 	category: TaskCategory
 	completed: boolean
