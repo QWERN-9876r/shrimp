@@ -63,7 +63,7 @@ export const createInitialItem = (type: EquipmentType): Item => {
 		description: itemData.description,
 		level: 1,
 		experience: 0,
-		maxExperience: 750,
+		maxExperience: 250,
 	}
 }
 
@@ -93,7 +93,7 @@ export const createInitialPlayer = (): Player => {
 		name: 'Герой Реальности',
 		level: 1,
 		experience: 0,
-		maxExperience: 1000,
+		maxExperience: 300,
 		equipment,
 		totalStats: calculatePlayerStats(equipment),
 	}
