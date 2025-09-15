@@ -268,6 +268,27 @@ const POTION_REWARDS_EXTENDED = {
 }
 
 const RARITY_ORDER = ['common', 'rare', 'epic', 'legendary']
+const RARITY_PRICE: Record<PotionRarity, number> = {
+	common: 90,
+	rare: 180,
+	epic: 1800,
+	legendary: 13500,
+}
+
+function getRandomPotionByRarity(rarity: PotionRarity) {
+	const potions = POTION_REWARDS_EXTENDED[rarity]
+	const potion = potions[Math.floor(Math.random() * potions.length)]
+
+	return {
+		id: `potion_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
+		name: potion.name,
+		icon: potion.icon,
+		description: potion.description,
+		rarity,
+		used: false,
+		createdAt: new Date(),
+	}
+}
 
 export const getBestPotion = (potions: Potion[]) => {
 	return potions.reduce((best, current) => {
@@ -282,33 +303,27 @@ export const getBestPotion = (potions: Potion[]) => {
 }
 
 export const generatePotionsByTask = (task: Task) => {
-	const rewardCount = Math.round(
-		(task.difficulty / 2) * ((Math.random() / 2) * 0.5),
+	const rewardCount = Math.min(
+		Math.round((task.difficulty / 30) * (Math.random() / 2 + 0.5)),
+		3,
 	)
+
+	if (rewardCount === 0) return [getRandomPotionByRarity('common')]
 
 	const getedPotions: Potion[] = new Array(rewardCount)
 
-	for (let i = 0; i < rewardCount; i++) {
-		let rarity: PotionRarity = 'common'
+	let rarity: PotionRarity = 'common'
 
-		const roll = Math.random() * 2 * task.difficulty
-		if (roll < 35) rarity = 'common'
-		else if (roll < 50) rarity = 'rare'
-		else if (roll < 95) rarity = 'epic'
-		else rarity = 'legendary'
+	const roll = Math.random() * 2 * task.difficulty
+	if (roll <= RARITY_PRICE.common) rarity = 'common'
+	else if (roll <= RARITY_PRICE.rare) rarity = 'rare'
+	else if (roll <= RARITY_PRICE.epic) rarity = 'epic'
+	else rarity = 'legendary'
 
-		const potions = POTION_REWARDS_EXTENDED[rarity]
-		const potion = potions[Math.floor(Math.random() * potions.length)]
+	getedPotions.push(getRandomPotionByRarity(rarity))
 
-		getedPotions.push({
-			id: `potion_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
-			name: potion.name,
-			icon: potion.icon,
-			description: potion.description,
-			rarity,
-			used: false,
-			createdAt: new Date(),
-		})
+	for (let i = 1; i < rewardCount; i++) {
+		getedPotions.push(getRandomPotionByRarity('common'))
 	}
 
 	return getedPotions
