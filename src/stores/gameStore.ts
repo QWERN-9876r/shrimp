@@ -265,12 +265,9 @@ export const useGameStore = create<GameStore>()(
 						taskData.difficulty,
 						taskData.unwillingness,
 					),
-					realDifficulty:
-						Math.round(
-							taskData.difficulty *
-								0.5 *
-								(taskData.unwillingness * 0.7),
-						) + 20,
+					realDifficulty: Math.round(
+						taskData.difficulty * 10 + taskData.unwillingness * 13,
+					),
 					createdAt: new Date(),
 				}
 
