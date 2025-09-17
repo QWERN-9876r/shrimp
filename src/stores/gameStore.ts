@@ -7,7 +7,7 @@ import {
 	calculateTaskExperience,
 	CATEGORY_TO_EQUIPMENT,
 } from '../utils/gameUtils'
-import { SHOW_POTION_ANIMATION_DURATION } from '../components/Tasks/TaskList'
+import { SHOW_POTION_ANIMATION_DURATION } from '../components/Tasks/TaskItemComponent'
 
 interface GameStore extends GameState {
 	// Actions для игрока

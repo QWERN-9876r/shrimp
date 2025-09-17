@@ -303,30 +303,60 @@ export const getBestPotion = (potions: Potion[]) => {
 	}, potions[0])
 }
 
-export const generatePotionsByTask = (task: Task) => {
-	const rewardCount = Math.min(
-		Math.round((task.realDifficulty / 30) * (Math.random() / 2 + 0.5)),
-		3,
-	)
-
-	if (rewardCount === 0) return []
-
-	const getedPotions: Potion[] = new Array(rewardCount)
-
+export const getRandomPotion = (realDifficulty: number) => {
 	let rarity: PotionRarity = 'common'
 
-	const roll = (task.realDifficulty + 50) * Math.random()
+	const roll = (realDifficulty + 50) * Math.random()
 
 	if (roll <= RARITY_PRICE.common) rarity = 'common'
 	else if (roll <= RARITY_PRICE.rare) rarity = 'rare'
 	else if (roll <= RARITY_PRICE.epic) rarity = 'epic'
 	else rarity = 'legendary'
 
-	getedPotions.push(getRandomPotionByRarity(rarity))
+	return getRandomPotionByRarity(rarity)
+}
 
-	for (let i = 1; i < rewardCount; i++) {
-		getedPotions.push(getRandomPotionByRarity('common'))
+export const generateArrayOfCommonsPotions = (count: number) => {
+	const potions: Potion[] = new Array(count)
+
+	for (let i = 0; i < count; i++) {
+		potions[i] = getRandomPotionByRarity('common')
 	}
 
-	return getedPotions
+	return potions
+}
+
+export const generatePotionsArrayByTask = (
+	task: Task,
+	countPotions: number,
+) => {
+	const potions: Potion[] = new Array(countPotions)
+
+	for (let i = 0; i < countPotions; i++) {
+		potions[i] = getRandomPotion(task.realDifficulty)
+	}
+
+	return potions
+}
+
+export const generatePotionsByTask = (task: Task) => {
+	const rewardCount = Math.min(
+		Math.round((task.realDifficulty / 30) * (Math.random() / 2 + 0.5)),
+		3,
+	)
+
+	if (rewardCount === 0) return { potionsArray: [], dropped: [] }
+
+	const potionsArray = generatePotionsArrayByTask(
+		task,
+		Math.round(Math.random() * 125) + 75,
+	)
+
+	return {
+		potionsArray,
+		dropped: [
+			potionsArray[Math.round((potionsArray.length * 2) / 3)],
+			...generateArrayOfCommonsPotions(rewardCount - 1),
+		],
+	}
 }

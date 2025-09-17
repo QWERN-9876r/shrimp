@@ -11,6 +11,7 @@ import { PotionInventory } from './components/Potions/PotionInventory'
 import { ExperienceSystem } from './components/Experience/ExperienceGain'
 import { colors } from './styles/colors'
 import { useState } from 'react'
+import { PotionDropProvider } from './components/Potions/PotionDropProvider'
 
 const AppContainer = styled.div`
 	min-height: 100vh;
@@ -110,67 +111,71 @@ function App() {
 	const [isDevMode, setIsDevMode] = useState(false)
 
 	return (
-		<ExperienceSystem>
-			<AppContainer>
-				<Header
-					initial={{ opacity: 0, y: -50 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8 }}
-				>
-					<Title>⚔️ Shrimp ⚔️</Title>
-				</Header>
+		<PotionDropProvider>
+			<ExperienceSystem>
+				<AppContainer>
+					<Header
+						initial={{ opacity: 0, y: -50 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+					>
+						<Title>⚔️ Shrimp ⚔️</Title>
+					</Header>
 
-				<MainContent>
-					<LeftColumn>
-						<TasksSection
-							initial={{ opacity: 0, x: -50 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ delay: 0.3, duration: 0.8 }}
-						>
-							<TaskCreator />
-							<TaskList />
-						</TasksSection>
-
-						{/* Добавляем инвентарь зелий */}
-						<motion.div
-							initial={{ opacity: 0, x: -50 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ delay: 0.4, duration: 0.8 }}
-						>
-							<PotionInventory />
-						</motion.div>
-
-						<CharacterSection
-							initial={{ opacity: 0, x: -50 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ delay: 0.5, duration: 0.8 }}
-						>
-							<CharacterSectionTitle>
-								👤 Твой персонаж
-							</CharacterSectionTitle>
-							<CharacterDisplay />
-							<PlayerStats />
-						</CharacterSection>
-					</LeftColumn>
-					{isDevMode && (
-						<DataSection>
-							<StoreTestPanel />
-
-							<motion.div
-								initial={{ opacity: 0, x: 50 }}
+					<MainContent>
+						<LeftColumn>
+							<TasksSection
+								initial={{ opacity: 0, x: -50 }}
 								animate={{ opacity: 1, x: 0 }}
-								transition={{ delay: 0.7, duration: 0.8 }}
+								transition={{ delay: 0.3, duration: 0.8 }}
 							>
-								<TestDataDisplay gameState={gameState} />
+								<TaskCreator />
+								<TaskList />
+							</TasksSection>
+
+							{/* Добавляем инвентарь зелий */}
+							<motion.div
+								initial={{ opacity: 0, x: -50 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{ delay: 0.4, duration: 0.8 }}
+							>
+								<PotionInventory />
 							</motion.div>
-						</DataSection>
-					)}
-				</MainContent>
-				<OpenTestPanelButton onClick={() => setIsDevMode(!isDevMode)}>
-					🔍
-				</OpenTestPanelButton>
-			</AppContainer>
-		</ExperienceSystem>
+
+							<CharacterSection
+								initial={{ opacity: 0, x: -50 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{ delay: 0.5, duration: 0.8 }}
+							>
+								<CharacterSectionTitle>
+									👤 Твой персонаж
+								</CharacterSectionTitle>
+								<CharacterDisplay />
+								<PlayerStats />
+							</CharacterSection>
+						</LeftColumn>
+						{isDevMode && (
+							<DataSection>
+								<StoreTestPanel />
+
+								<motion.div
+									initial={{ opacity: 0, x: 50 }}
+									animate={{ opacity: 1, x: 0 }}
+									transition={{ delay: 0.7, duration: 0.8 }}
+								>
+									<TestDataDisplay gameState={gameState} />
+								</motion.div>
+							</DataSection>
+						)}
+					</MainContent>
+					<OpenTestPanelButton
+						onClick={() => setIsDevMode(!isDevMode)}
+					>
+						🔍
+					</OpenTestPanelButton>
+				</AppContainer>
+			</ExperienceSystem>
+		</PotionDropProvider>
 	)
 }
 
