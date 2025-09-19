@@ -257,27 +257,15 @@ export const PotionDropAnimation: React.FC<PotionDropAnimationProps> = ({
 	// ВОССТАНОВЛЕННЫЙ АЛГОРИТМ: точно такой же расчет как в оригинале
 	const finalOffset = useMemo(() => {
 		const totalItems = potions.length
-		const winnerIndex = Math.round((2 / 3) * totalItems) // Тот же индекс что и для winner
+		const winnerIndex = Math.round((2 / 3) * totalItems)
 		const centerOffset = containerWidth / 2 // Центр контейнера
 
-		// ВАЖНО: Смещение для попадания выигрышного элемента в центр
-		// + небольшое случайное смещение как в оригинале
 		const finalOffset =
 			winnerIndex * ITEM_WIDTH - centerOffset + ITEM_WIDTH * Math.random()
 
-		console.log({
-			potions,
-			finalOffset,
-			winnerIndex,
-			winner,
-			totalItems,
-			containerWidth,
-		})
-
 		return finalOffset
-	}, [potions, containerWidth, winner]) // Добавляем winner в зависимости для консистентности
+	}, [potions, containerWidth])
 
-	// Оптимизированный расчет видимых элементов с throttling
 	const [visibleItems, setVisibleItems] = useState<
 		Array<{
 			potion: Potion
@@ -476,7 +464,6 @@ export const PotionDropAnimation: React.FC<PotionDropAnimationProps> = ({
 						</WinnerPotion>
 
 						<CloseButton
-							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 							onClick={onComplete}
 							initial={{ scale: 0 }}

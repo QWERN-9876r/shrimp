@@ -270,10 +270,10 @@ const POTION_REWARDS_EXTENDED = {
 
 const RARITY_ORDER = ['common', 'rare', 'epic', 'legendary']
 const RARITY_PRICE: Record<PotionRarity, number> = {
-	common: 70,
-	rare: 200,
-	epic: 270,
-	legendary: 280,
+	common: 40,
+	rare: 65,
+	epic: 92,
+	legendary: 102,
 }
 
 function getRandomPotionByRarity(rarity: PotionRarity) {
@@ -306,12 +306,12 @@ export const getBestPotion = (potions: Potion[]) => {
 export const getRandomPotion = (realDifficulty: number) => {
 	let rarity: PotionRarity = 'common'
 
-	const roll = (realDifficulty + 50) * Math.random()
+	const roll = Math.random() * 100 + realDifficulty / 23 // 23 = max(realDifficulty) * 10
 
-	if (roll <= RARITY_PRICE.common) rarity = 'common'
-	else if (roll <= RARITY_PRICE.rare) rarity = 'rare'
-	else if (roll <= RARITY_PRICE.epic) rarity = 'epic'
-	else rarity = 'legendary'
+	if (roll >= RARITY_PRICE.legendary) rarity = 'legendary'
+	else if (roll >= RARITY_PRICE.epic) rarity = 'epic'
+	else if (roll >= RARITY_PRICE.rare) rarity = 'rare'
+	else rarity = 'common'
 
 	return getRandomPotionByRarity(rarity)
 }
