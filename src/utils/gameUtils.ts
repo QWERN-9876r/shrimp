@@ -272,8 +272,8 @@ const RARITY_ORDER = ['common', 'rare', 'epic', 'legendary']
 const RARITY_PRICE: Record<PotionRarity, number> = {
 	common: 40,
 	rare: 65,
-	epic: 92,
-	legendary: 102,
+	epic: 88,
+	legendary: 105,
 }
 
 function getRandomPotionByRarity(rarity: PotionRarity) {
