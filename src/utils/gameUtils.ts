@@ -342,7 +342,7 @@ export const generatePotionsArrayByTask = (
 export const generatePotionsByTask = (task: Task) => {
 	const rewardCount = Math.min(
 		Math.round((task.realDifficulty / 30) * (Math.random() / 2 + 0.5)),
-		3,
+		2,
 	)
 
 	if (rewardCount === 0) return { potionsArray: [], dropped: [] }
@@ -356,7 +356,7 @@ export const generatePotionsByTask = (task: Task) => {
 		potionsArray,
 		dropped: [
 			potionsArray[Math.round((potionsArray.length * 2) / 3)],
-			...generateArrayOfCommonsPotions(rewardCount - 1),
+			// ...generateArrayOfCommonsPotions(rewardCount - 1), рарок копилось слишком много
 		],
 	}
 }
